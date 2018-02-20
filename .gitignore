@@ -1,0 +1,4 @@
+*.pyc
+*.bak
+/bin/
+/obj/
