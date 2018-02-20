@@ -2,7 +2,7 @@
 """
 Created on Fri Apr 28 11:32:42 2017
  
-@author: tiger
+@author: wangwust
 """
 from selenium import webdriver
 from bs4 import BeautifulSoup
@@ -108,5 +108,3 @@ for i in range(0,Max_Page):
  
 driver.quit()
 to_sql(books)
-#books=zip(*books)
-##print books[198]
