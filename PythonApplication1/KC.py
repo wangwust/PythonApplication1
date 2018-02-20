@@ -6,7 +6,7 @@ driver = webdriver.Firefox()
 def run():
     loginSuccess = login("http://www.cpkk7.com/login")
     if bool(loginSuccess) == False:
-        print("µÇÂ¼Ê§°Ü")
+        print("ï¿½ï¿½Â¼Ê§ï¿½ï¿½")
         return
 
     driver.implicitly_wait(3)
@@ -14,12 +14,12 @@ def run():
         result = get_openresult("http://www.cpkk7.com/lottery/K3/1407")
 
         if result == "":
-            print("¶ÁÈ¡¿ª½±½á¹ûÊ§°Ü")
+            print("ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½")
         else:
             print(result)
         time.sleep(60)
 
-def login(url): #µÇÂ¼
+def login(url): #ï¿½ï¿½Â¼
     try:
         driver.get(url)
 
