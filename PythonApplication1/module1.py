@@ -15,7 +15,7 @@ import pymssql
 def get_link(soup_page):
     soup = soup_page                                           
     items = soup('div','book-mid-info')
-    ## ??ȡ????
+
     links = []
     for item in items:
         links.append('https:'+item.h4.a.get('href'))
@@ -109,9 +109,5 @@ for i in range(0,Max_Page):
  
 driver.quit()
 to_sql(books)
-
-#n=len(books)
-#books=zip(*books)
-#books.insert(0,range(1,n+1))
 #books=zip(*books)
 ##print books[198]
