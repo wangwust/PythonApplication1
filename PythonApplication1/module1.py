@@ -12,8 +12,6 @@ import requests
 #import MySQLdb
 import pymssql
  
-######??ȡ???е???ѡ?鼮ҳ??????
-# ???ý???ÿ???鼮??Ӧ??ҳ??????
 def get_link(soup_page):
     soup = soup_page                                           
     items = soup('div','book-mid-info')
@@ -23,42 +21,28 @@ def get_link(soup_page):
         links.append('https:'+item.h4.a.get('href'))
     return links
  
-### ????ÿ?????ӣ???ȡ??Ҫ????Ϣ
- 
 def get_book_info(link):
     driver.get(link)
     #soup = BeautifulSoup(driver.page_source)
-    #??????????????????id
     book_id=datetime.datetime.now().strftime("%Y%m%d%H%M%S")+str(random.randint(1000,9999))
-    ### ????
     title = driver.find_element_by_xpath("//div[@class='book-information cf']/div/h1/em").text
-    ### ????
     author = driver.find_element_by_xpath("//div[@class='book-information cf']/div/h1/span/a").text
-    ###????
     types = driver.find_element_by_xpath("//div[@class='book-information cf']/div/p[1]/a").text
-    ###״̬
     status = driver.find_element_by_xpath("//div[@class='book-information cf']/div/p[1]/span[1]").text
-    ###????
     words = driver.find_element_by_xpath("//div[@class='book-information cf']/div/p[3]/em[1]").text
-    ###????
     cliks = driver.find_element_by_xpath("//div[@class='book-information cf']/div/p[3]/em[2]").text
-    ###?Ƽ?
     recoms = driver.find_element_by_xpath("//div[@class='book-information cf']/div/p[3]/em[3]").text
-    ### ??????
     try :
         votes = driver.find_element_by_xpath("//p[@id='j_userCount']/span").text
     except (ZeroDivisionError,Exception) as e:
         votes=0
         print e
         pass
-    #### ????
     score = driver.find_element_by_id("j_bookScore").text
-    ##??????Ϣ
     info = driver.find_element_by_xpath("//div[@class='book-intro']").text.replace('\n','')
  
     return (book_id,title,author,types,status,words,cliks,recoms,votes,score,info)
  
-#############???????ݵ?mysql
 def to_sql(data):
     #conn=MySQLdb.connect("localhost","root","wangwust","test",charset="utf8" )
     conn=pymssql.connect(host='127.0.0.1',user='sa',password='123',database='test')
@@ -88,7 +72,6 @@ def to_sql(data):
     cursor.close()
     conn.close()
 
-#####????ÿ??ӰƬ?Ľ???ҳ????ȡ??Ϣ
 base_url = "https://a.qidian.com/?size=-1&sign=-1&tag=-1&chanId=-1&subCateId=-1&orderId=&update=-1&page="
 links = []
 Max_Page = 1
@@ -103,7 +86,6 @@ for page in range(1, Max_Page+1):
  
 #print links[9][19]
  
-### ?????????鼮??Ϣ
 books = []
 rate = 1
 driver = webdriver.PhantomJS("C:\Python27\phantomjs.exe")
@@ -127,7 +109,7 @@ for i in range(0,Max_Page):
  
 driver.quit()
 to_sql(books)
- ###????id
+
 #n=len(books)
 #books=zip(*books)
 #books.insert(0,range(1,n+1))
