@@ -102,7 +102,6 @@ for i in range(0,Max_Page):
         rate+=1
     if i % 15 ==0 :
             driver.quit()
-            #д?????ݿ?
             to_sql(books)
             books=[]
             driver = webdriver.Firefox()
